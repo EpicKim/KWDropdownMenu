@@ -13,17 +13,19 @@ class KWDropdownBaseCollectionViewCell:UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.cornerRadius = kDropdownMenuDefaultCornerRadius
-        self.layer.borderWidth = 0.5
-        
-        basicLabel.text = ""
-        basicLabel.font = UIFont.systemFontOfSize(kDropdownMenuDefaultTitleSize)
-        self.addSubview(basicLabel)
-        
-        weak var ws = self
-        basicLabel.snp_makeConstraints { (make) in
-            make.centerX.equalTo(ws!.snp_centerX)
-            make.centerY.equalTo(ws!.snp_centerY)
+        if self.didNeedLoadBasicUI() {
+            self.layer.cornerRadius = kDropdownMenuDefaultCornerRadius
+            self.layer.borderWidth = 0.5
+            
+            basicLabel.text = ""
+            basicLabel.font = UIFont.systemFontOfSize(kDropdownMenuDefaultTitleSize)
+            self.addSubview(basicLabel)
+            
+            weak var ws = self
+            basicLabel.snp_makeConstraints { (make) in
+                make.centerX.equalTo(ws!.snp_centerX)
+                make.centerY.equalTo(ws!.snp_centerY)
+            }
         }
     }
     
@@ -41,5 +43,9 @@ class KWDropdownBaseCollectionViewCell:UICollectionViewCell {
             self.layer.borderColor = kDropdownMenuDefaultLayerBorderColor.CGColor
             basicLabel.textColor = kDropdownMenuDefaultLayerTitleColor
         }
+    }
+    
+    func didNeedLoadBasicUI() -> Bool {
+        return true
     }
 }

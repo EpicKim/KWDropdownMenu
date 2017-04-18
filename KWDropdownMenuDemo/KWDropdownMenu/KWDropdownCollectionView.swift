@@ -30,6 +30,7 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
     var itemHeigh:CGFloat!
     // 点击回调
     var clickClosure:(item:KWDropdownBaseItem, indexPath:NSIndexPath)->Void = {_ in }
+    var didNeedHighlightItemClosure:(indexPath:NSIndexPath)->Void = {_ in }
     
     convenience init(itemWidth:CGFloat,
                      height:CGFloat,
@@ -85,5 +86,9 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let item = self.datasource[indexPath.row]
         self.clickClosure(item: item, indexPath: indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        didNeedHighlightItemClosure(indexPath: indexPath)
     }
 }

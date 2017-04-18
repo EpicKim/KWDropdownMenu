@@ -22,6 +22,10 @@ let kDropdwonMenuCollectionViewLeftRightInset:CGFloat = 20
 // collectionview上下间距
 let kDropdwonMenuCollectionViewTopBottomInset:CGFloat = 20
 
+var kDropdownMenuDefaultCornerRadius:CGFloat = 5
+
+var kDropdownMenuDefaultTitleSize:CGFloat = 14
+
 var kDropdownMenuDefaultLayerBorderColor = UIColor.blackColor()
 
 var kDropdownMenuDefaultLayerTitleColor = UIColor.blackColor()
@@ -32,8 +36,7 @@ var kDropdownMenuDefaultLayerTitleSelectedColor = UIColor.redColor()
 
 var kDropdownMenuTitleColor = UIColor.redColor()
 
-var kDropdownMenuDefaultCornerRadius:CGFloat = 5
+var kDropdwonMenuTitleUpperImage = UIImage(named: "nav_arrow_up_nor")
 
-var kDropdownMenuDefaultTitleSize:CGFloat = 14
-
+var kDropdwonMenuTitleDownImage = UIImage(named: "nav_arrow_down_nor")
 

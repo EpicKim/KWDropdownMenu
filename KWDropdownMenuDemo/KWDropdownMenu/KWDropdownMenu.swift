@@ -22,14 +22,51 @@ extension UIView {
         return false
     }
 }
+private var key: Void?
+private var selectedItemKey: Void?
 
 extension UIViewController {
+    @IBInspectable var dropDownDatasource: [KWDropdownBaseItem]? {
+        get {
+            return objc_getAssociatedObject(self, &key) as? [KWDropdownBaseItem]
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    @IBInspectable var selectedItem: KWDropdownBaseItem? {
+        get {
+            return objc_getAssociatedObject(self, &selectedItemKey) as? KWDropdownBaseItem
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &selectedItemKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    func updateDropdownMenuSelectedIndex(index:Int) {
+        if self.dropDownDatasource == nil {
+            return
+        }
+        for item in self.dropDownDatasource! {
+            item.selected = false
+        }
+        let tmpItem = self.dropDownDatasource![index]
+        tmpItem.selected = true
+        (self.navigationItem.titleView as? KWDropdownTapView)?.update(tmpItem.title)
+    }
     
     func setupDropdownMenu(datasource:[KWDropdownBaseItem],
                            collectionViewClass:AnyClass,
                            designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
-                           clickBlock:(index:Int)->Void) {
-        
+                           backgroundColor:UIColor = UIColor.whiteColor(),
+                           clickBlock:(index:Int)->Void,
+                           didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) {
+        if datasource.count == 0 {
+            return
+        }
+        self.selectedItem = datasource.first
+        self.dropDownDatasource = datasource
         weak var ws = self
         
         var tmpTitle = self.title
@@ -44,15 +81,18 @@ extension UIViewController {
         // ********设置标题***********
         self.title = ""
         let tapView = KWDropdownTapView(title: tmpTitle!)
+//        tapView.backgroundColor = backgroundColor
         self.navigationItem.titleView = tapView
         
         // ********事件***********
         tapView.clickBlock = {(expanded)->Void in
             if expanded {
-                ws!.didNeedShowContentView(datasource,
+                ws!.didNeedShowContentView(ws!.dropDownDatasource!,
                                            collectionViewClass: collectionViewClass,
                                            designedHeight:designedHeight,
-                                           clickBlock: clickBlock)
+                                           backgroundColor:backgroundColor,
+                                           clickBlock: clickBlock,
+                                           didNeedHighLightBlock: didNeedHighLightBlock)
             }
             else {
                 ws!.hideDropdownMenu()
@@ -64,7 +104,9 @@ extension UIViewController {
     func didNeedShowContentView(datasource:[KWDropdownBaseItem],
                                 collectionViewClass:AnyClass,
                                 designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
-                                clickBlock:(index:Int)->Void) {
+                                backgroundColor:UIColor = UIColor.whiteColor(),
+                                clickBlock:(index:Int)->Void,
+                                didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) {
         if self.view.hasShowDropdownMenu() {
             return
         }
@@ -91,15 +133,21 @@ extension UIViewController {
                                              minimumInteritemSpacing: kDropdownMenuDefaultItemHorizontalSpace,
                                              collectionViewClass: collectionViewClass,
                                              datasource: datasource)
+        cView.backgroundColor = backgroundColor
         cView.clickClosure = {(item, indexPath)->Void in
             for baseItem in datasource {
                 baseItem.selected = false
             }
             item.selected = !item.selected
             ws!.hideDropdownMenu()
-            let titleView = self.navigationItem.titleView as! KWDropdownTapView
+            let titleView = ws!.navigationItem.titleView as! KWDropdownTapView
             titleView.update(item.title)
+            ws!.selectedItem = ws!.dropDownDatasource![indexPath.row]
             clickBlock(index: indexPath.row)
+        }
+        cView.didNeedHighlightItemClosure = {(indexPath)->Void in
+            let cell = cView.cellForItemAtIndexPath(indexPath)
+            didNeedHighLightBlock(cell: cell!)
         }
         self.view.addSubview(cView)
         
