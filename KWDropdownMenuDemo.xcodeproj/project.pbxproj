@@ -14,12 +14,16 @@
 		8120D1E81E2DCCCC000AEA11 /* KWDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120D1E21E2DCCCC000AEA11 /* KWDropdownMenu.swift */; };
 		8120D1E91E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120D1E31E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift */; };
 		8120D1EA1E2DCCCC000AEA11 /* KWDropdownTapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120D1E41E2DCCCC000AEA11 /* KWDropdownTapView.swift */; };
+		812EF1F31EA5D7AF003F6758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812EF1F21EA5D7AF003F6758 /* RootViewController.swift */; };
 		8176DB9F1E28D88500331F0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176DB901E28D88500331F0E /* AppDelegate.swift */; };
 		8176DBA01E28D88500331F0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8176DB911E28D88500331F0E /* Assets.xcassets */; };
 		8176DBA11E28D88500331F0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8176DB921E28D88500331F0E /* LaunchScreen.storyboard */; };
 		8176DBA21E28D88500331F0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8176DB941E28D88500331F0E /* Main.storyboard */; };
 		8176DBA31E28D88500331F0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8176DB961E28D88500331F0E /* Info.plist */; };
-		8176DBA91E28D88500331F0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176DB9E1E28D88500331F0E /* ViewController.swift */; };
+		8176DBA91E28D88500331F0E /* SingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176DB9E1E28D88500331F0E /* SingleViewController.swift */; };
+		81AD806F1EA5DE0400AAD083 /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */; };
+		81AD80781EA7126400AAD083 /* KWSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80761EA7126400AAD083 /* KWSegmentControl.swift */; };
+		81AD80791EA7126400AAD083 /* KWSegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,13 +34,17 @@
 		8120D1E21E2DCCCC000AEA11 /* KWDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWDropdownMenu.swift; sourceTree = "<group>"; };
 		8120D1E31E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWDropdownMenuConstants.swift; sourceTree = "<group>"; };
 		8120D1E41E2DCCCC000AEA11 /* KWDropdownTapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWDropdownTapView.swift; sourceTree = "<group>"; };
+		812EF1F21EA5D7AF003F6758 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		8176DB4B1E24D06A00331F0E /* KWDropdownMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWDropdownMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8176DB901E28D88500331F0E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8176DB911E28D88500331F0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8176DB931E28D88500331F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8176DB951E28D88500331F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8176DB961E28D88500331F0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8176DB9E1E28D88500331F0E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8176DB9E1E28D88500331F0E /* SingleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleViewController.swift; sourceTree = "<group>"; };
+		81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
+		81AD80761EA7126400AAD083 /* KWSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControl.swift; sourceTree = "<group>"; };
+		81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControlView.swift; sourceTree = "<group>"; };
 		8E0687DAC5E9AD985D4AEE08 /* Pods-KWDropdownMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu.release.xcconfig"; sourceTree = "<group>"; };
 		DDB499B8009BB5CD2F90D19F /* Pods_KWDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KWDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,6 +64,7 @@
 		8120D1DD1E2DCCCC000AEA11 /* KWDropdownMenu */ = {
 			isa = PBXGroup;
 			children = (
+				81AD80751EA7126400AAD083 /* KWSegmentControl */,
 				8120D1DE1E2DCCCC000AEA11 /* Custom */,
 				8120D1E11E2DCCCC000AEA11 /* KWDropdownCollectionView.swift */,
 				8120D1E21E2DCCCC000AEA11 /* KWDropdownMenu.swift */,
@@ -101,9 +110,20 @@
 				8176DB921E28D88500331F0E /* LaunchScreen.storyboard */,
 				8176DB941E28D88500331F0E /* Main.storyboard */,
 				8176DB961E28D88500331F0E /* Info.plist */,
-				8176DB9E1E28D88500331F0E /* ViewController.swift */,
+				812EF1F21EA5D7AF003F6758 /* RootViewController.swift */,
+				8176DB9E1E28D88500331F0E /* SingleViewController.swift */,
+				81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */,
 			);
 			path = KWDropdownMenuDemo;
+			sourceTree = "<group>";
+		};
+		81AD80751EA7126400AAD083 /* KWSegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				81AD80761EA7126400AAD083 /* KWSegmentControl.swift */,
+				81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */,
+			);
+			path = KWSegmentControl;
 			sourceTree = "<group>";
 		};
 		871142C05CEC1D8C2613BEA8 /* Frameworks */ = {
@@ -250,11 +270,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8120D1E51E2DCCCC000AEA11 /* KWDropdownBaseCollectionViewCell.swift in Sources */,
+				81AD806F1EA5DE0400AAD083 /* MultiViewController.swift in Sources */,
 				8176DB9F1E28D88500331F0E /* AppDelegate.swift in Sources */,
+				81AD80781EA7126400AAD083 /* KWSegmentControl.swift in Sources */,
 				8120D1E81E2DCCCC000AEA11 /* KWDropdownMenu.swift in Sources */,
-				8176DBA91E28D88500331F0E /* ViewController.swift in Sources */,
+				8176DBA91E28D88500331F0E /* SingleViewController.swift in Sources */,
+				81AD80791EA7126400AAD083 /* KWSegmentControlView.swift in Sources */,
 				8120D1E71E2DCCCC000AEA11 /* KWDropdownCollectionView.swift in Sources */,
 				8120D1E91E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift in Sources */,
+				812EF1F31EA5D7AF003F6758 /* RootViewController.swift in Sources */,
 				8120D1EA1E2DCCCC000AEA11 /* KWDropdownTapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

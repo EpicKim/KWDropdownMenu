@@ -23,15 +23,36 @@ extension UIView {
     }
 }
 private var key: Void?
+private var multiDatasourceKey: Void?
 private var selectedItemKey: Void?
+private var currentDropdownSectionKey: Void?
 
+// MARK: -Runtime添加属性
 extension UIViewController {
+    @IBInspectable var currentDropdownSection: Int? {
+        get {
+            return objc_getAssociatedObject(self, &currentDropdownSectionKey) as? Int
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &currentDropdownSectionKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     @IBInspectable var dropDownDatasource: [KWDropdownBaseItem]? {
         get {
             return objc_getAssociatedObject(self, &key) as? [KWDropdownBaseItem]
         }
         set(newValue) {
             objc_setAssociatedObject(self, &key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    @IBInspectable var multiDropDownDatasource: [[KWDropdownBaseItem]]? {
+        get {
+            return objc_getAssociatedObject(self, &multiDatasourceKey) as? [[KWDropdownBaseItem]]
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &multiDatasourceKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -43,7 +64,7 @@ extension UIViewController {
             objc_setAssociatedObject(self, &selectedItemKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+    // MARK: -更新
     func updateDropdownMenuSelectedIndex(index:Int) {
         if self.dropDownDatasource == nil {
             return
@@ -55,7 +76,72 @@ extension UIViewController {
         tmpItem.selected = true
         (self.navigationItem.titleView as? KWDropdownTapView)?.update(tmpItem.title)
     }
-    
+    // MARK: -初始化多个section的下拉列表
+    func setupMultiDropdownMenu(datasource:[[KWDropdownBaseItem]],
+                                segmentTitles:[String],
+                                collectionViewClass:AnyClass,
+                                designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
+                                backgroundColor:UIColor = UIColor.whiteColor(),
+                                clickBlock:(section:Int,index:Int)->Void,
+                                didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) {
+        if datasource.count == 0 {
+            return
+        }
+        self.selectedItem = datasource.first?.first
+        self.multiDropDownDatasource = datasource
+        weak var ws = self
+        
+        var tmpTitle = self.title
+        if tmpTitle == nil {
+            for array in datasource {
+                for item in array {
+                    if item.selected == true {
+                        tmpTitle = item.title
+                        break
+                    }
+                }
+            }
+        }
+        // ********设置标题***********
+        self.title = ""
+        let tapView = KWDropdownTapView(title: tmpTitle!)
+        self.navigationItem.titleView = tapView
+        
+        // ********事件***********
+        tapView.clickBlock = {(expanded)->Void in
+            if expanded {
+                var customViews = [UIView]()
+                var heights = [CGFloat]()
+                for i in 0...(datasource.count - 1) {
+                    let array = datasource[i]
+                    let height = UIViewController.getDropdownCollectionViewHeight(datasource.first!.count, designedHeight: designedHeight)
+                    let cview = self.getCollectionView(array, collectionViewClass: collectionViewClass, clickBlock: { (index) in
+                        for tmp in datasource {
+                            for item in tmp {
+                                item.selected = false
+                            }
+                        }
+                        datasource[i][index].selected = true
+                        ws?.currentDropdownSection = i
+                        clickBlock(section: i, index: index)
+                    })
+                    customViews.append(cview)
+                    heights.append(height)
+                }
+                
+                let selectedIndex = self.currentDropdownSection == nil ? 0:self.currentDropdownSection!
+                let seg = KWSegmentControlView(titles: segmentTitles,
+                                               views: customViews,
+                                               heights: heights,
+                                               selectedIndex: selectedIndex)
+                seg.show(self.view)
+            }
+            else {
+                ws!.hideDropdownMenu()
+            }
+        }
+    }
+    // MARK: -初始化单个section的下拉列表
     func setupDropdownMenu(datasource:[KWDropdownBaseItem],
                            collectionViewClass:AnyClass,
                            designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
@@ -81,7 +167,6 @@ extension UIViewController {
         // ********设置标题***********
         self.title = ""
         let tapView = KWDropdownTapView(title: tmpTitle!)
-//        tapView.backgroundColor = backgroundColor
         self.navigationItem.titleView = tapView
         
         // ********事件***********
@@ -100,26 +185,29 @@ extension UIViewController {
         }
     }
     
+    // MARK: -Static
+    static func getDropdownCollectionViewHeight(dataCount:Int,
+                                        designedHeight:CGFloat) -> CGFloat {
+        let remainder = dataCount % kDropdownMenuMaxItemsOneLine
+        var rowCount = (dataCount - remainder)/kDropdownMenuMaxItemsOneLine
+        if remainder > 0 {
+            rowCount = rowCount + 1
+        }
+        let verticalWhiteSpace = CGFloat(rowCount - 1)*kDropdownMenuDefaultItemVerticalSpace
+        let height = CGFloat(rowCount) * designedHeight + 2*kDropdwonMenuCollectionViewTopBottomInset + verticalWhiteSpace
+        return height
+    }
+    
     // MARK: -Private
-    func didNeedShowContentView(datasource:[KWDropdownBaseItem],
-                                collectionViewClass:AnyClass,
-                                designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
-                                backgroundColor:UIColor = UIColor.whiteColor(),
-                                clickBlock:(index:Int)->Void,
-                                didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) {
-        if self.view.hasShowDropdownMenu() {
-            return
-        }
+    func getCollectionView(datasource:[KWDropdownBaseItem],
+                           collectionViewClass:AnyClass,
+                           designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
+                           section:Int = 0,
+                           clickBlock:(index:Int)->Void,
+                           didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) -> UICollectionView {
         weak var ws = self
-        // ********设置选项卡***********
         let screenWidth = UIScreen.mainScreen().bounds.size.width
-        let dataCount = datasource.count
-        // 每行显示数
-        var displayNumberPerLine = dataCount
-        // 超出最大显示数
-        if dataCount > kDropdownMenuMaxItemsOneLine {
-            displayNumberPerLine = kDropdownMenuMaxItemsOneLine
-        }
+        let displayNumberPerLine = 3
         // 选项高度
         let itemHeight = designedHeight
         // 总空白间距
@@ -133,7 +221,6 @@ extension UIViewController {
                                              minimumInteritemSpacing: kDropdownMenuDefaultItemHorizontalSpace,
                                              collectionViewClass: collectionViewClass,
                                              datasource: datasource)
-        cView.backgroundColor = backgroundColor
         cView.clickClosure = {(item, indexPath)->Void in
             for baseItem in datasource {
                 baseItem.selected = false
@@ -142,22 +229,38 @@ extension UIViewController {
             ws!.hideDropdownMenu()
             let titleView = ws!.navigationItem.titleView as! KWDropdownTapView
             titleView.update(item.title)
-            ws!.selectedItem = ws!.dropDownDatasource![indexPath.row]
+            ws!.selectedItem = datasource[indexPath.row]
             clickBlock(index: indexPath.row)
         }
         cView.didNeedHighlightItemClosure = {(indexPath)->Void in
             let cell = cView.cellForItemAtIndexPath(indexPath)
             didNeedHighLightBlock(cell: cell!)
         }
+        
+        return cView
+    }
+
+    func didNeedShowContentView(datasource:[KWDropdownBaseItem],
+                                collectionViewClass:AnyClass,
+                                designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
+                                backgroundColor:UIColor = UIColor.whiteColor(),
+                                clickBlock:(index:Int)->Void,
+                                didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) {
+        if self.view.hasShowDropdownMenu() {
+            return
+        }
+        weak var ws = self
+        // ********设置选项卡***********
+        let cView = self.getCollectionView(datasource,
+                                           collectionViewClass: collectionViewClass,
+                                           designedHeight: designedHeight,
+                                           clickBlock: clickBlock,
+                                           didNeedHighLightBlock: didNeedHighLightBlock)
+
+        cView.backgroundColor = backgroundColor
         self.view.addSubview(cView)
         
-        let remainder = dataCount % kDropdownMenuMaxItemsOneLine
-        var rowCount = (dataCount - remainder)/kDropdownMenuMaxItemsOneLine
-        if remainder > 0 {
-            rowCount = rowCount + 1
-        }
-        let verticalWhiteSpace = CGFloat(rowCount - 1)*kDropdownMenuDefaultItemVerticalSpace
-        let height = CGFloat(rowCount) * designedHeight + 2*kDropdwonMenuCollectionViewTopBottomInset + verticalWhiteSpace
+        let height = UIViewController.getDropdownCollectionViewHeight(datasource.count, designedHeight: designedHeight)
         
         cView.snp_makeConstraints { (make) in
             make.left.equalTo(ws!.view.snp_left)
@@ -188,7 +291,8 @@ extension UIViewController {
         (self.navigationItem.titleView as? KWDropdownTapView)?.reset()
         for subview in self.view.subviews {
             if subview.isKindOfClass(KWDropdownCollectionView.self) ||
-                subview.tag == kDropdownBackgroundviewTag {
+               subview.tag == kDropdownBackgroundviewTag ||
+               subview.isKindOfClass(KWSegmentControlView.self) {
                 subview.removeFromSuperview()
             }
         }
