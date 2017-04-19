@@ -52,9 +52,10 @@ class MultiViewController: UIViewController {
                            KWDropdownBaseItem(title:"hewhw"),
                            KWDropdownBaseItem(title:"6")]
         
-        self.setupMultiDropdownMenu([datasource,datasource2,datasource3],
-                                     segmentTitles: ["seg1", "seg2","seg3"],
+        self.setupMultiDropdownMenu([datasource,datasource3],
+                                     segmentTitles: ["seg1", "seg2"],
                                      collectionViewClass: KWDropdownBaseCollectionViewCell.self,
+                                     backgroundColor:UIColor.whiteColor(),
                                      clickBlock: { (section,index) in
             
         })

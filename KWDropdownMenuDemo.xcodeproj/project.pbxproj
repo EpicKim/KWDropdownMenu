@@ -24,6 +24,7 @@
 		81AD806F1EA5DE0400AAD083 /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */; };
 		81AD80781EA7126400AAD083 /* KWSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80761EA7126400AAD083 /* KWSegmentControl.swift */; };
 		81AD80791EA7126400AAD083 /* KWSegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */; };
+		81AD807B1EA715EC00AAD083 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
 		81AD80761EA7126400AAD083 /* KWSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControl.swift; sourceTree = "<group>"; };
 		81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControlView.swift; sourceTree = "<group>"; };
+		81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8E0687DAC5E9AD985D4AEE08 /* Pods-KWDropdownMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu.release.xcconfig"; sourceTree = "<group>"; };
 		DDB499B8009BB5CD2F90D19F /* Pods_KWDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KWDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 				812EF1F21EA5D7AF003F6758 /* RootViewController.swift */,
 				8176DB9E1E28D88500331F0E /* SingleViewController.swift */,
 				81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */,
+				81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */,
 			);
 			path = KWDropdownMenuDemo;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				8120D1E91E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift in Sources */,
 				812EF1F31EA5D7AF003F6758 /* RootViewController.swift in Sources */,
 				8120D1EA1E2DCCCC000AEA11 /* KWDropdownTapView.swift in Sources */,
+				81AD807B1EA715EC00AAD083 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

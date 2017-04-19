@@ -114,8 +114,10 @@ extension UIViewController {
                 var heights = [CGFloat]()
                 for i in 0...(datasource.count - 1) {
                     let array = datasource[i]
-                    let height = UIViewController.getDropdownCollectionViewHeight(datasource.first!.count, designedHeight: designedHeight)
-                    let cview = self.getCollectionView(array, collectionViewClass: collectionViewClass, clickBlock: { (index) in
+                    let height = UIViewController.getDropdownCollectionViewHeight(array.count, designedHeight: designedHeight)
+                    let cview = self.getCollectionView(array, collectionViewClass: collectionViewClass,
+                                                       backgroundColor:backgroundColor,
+                                                       clickBlock: { (index) in
                         for tmp in datasource {
                             for item in tmp {
                                 item.selected = false
@@ -135,6 +137,8 @@ extension UIViewController {
                                                heights: heights,
                                                selectedIndex: selectedIndex)
                 seg.show(self.view)
+                
+                self.addShadowView(seg.snp_bottom)
             }
             else {
                 ws!.hideDropdownMenu()
@@ -199,10 +203,32 @@ extension UIViewController {
     }
     
     // MARK: -Private
+    // 设置不透明的底图，点击隐藏展开视图
+    func addShadowView(topConstrait:ConstraintItem) {
+        // ********设置透明背景图***********
+        weak var ws = self
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.blackColor()
+        backgroundView.alpha = 0.3
+        backgroundView.tag = kDropdownBackgroundviewTag
+        self.view.addSubview(backgroundView)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.hideDropdownMenu))
+        backgroundView.addGestureRecognizer(tap)
+        
+        backgroundView.snp_makeConstraints { (make) in
+            make.left.equalTo(ws!.view.snp_left)
+            make.right.equalTo(ws!.view.snp_right)
+            make.top.equalTo(topConstrait)
+            make.bottom.equalTo(ws!.view.snp_bottom)
+        }
+    }
+    
     func getCollectionView(datasource:[KWDropdownBaseItem],
                            collectionViewClass:AnyClass,
                            designedHeight:CGFloat = kDropdownMenuDefaultItemHeight,
                            section:Int = 0,
+                           backgroundColor:UIColor,
                            clickBlock:(index:Int)->Void,
                            didNeedHighLightBlock:(cell:UICollectionViewCell)->Void = {_ in}) -> UICollectionView {
         weak var ws = self
@@ -221,6 +247,7 @@ extension UIViewController {
                                              minimumInteritemSpacing: kDropdownMenuDefaultItemHorizontalSpace,
                                              collectionViewClass: collectionViewClass,
                                              datasource: datasource)
+        cView.backgroundColor = backgroundColor
         cView.clickClosure = {(item, indexPath)->Void in
             for baseItem in datasource {
                 baseItem.selected = false
@@ -254,10 +281,9 @@ extension UIViewController {
         let cView = self.getCollectionView(datasource,
                                            collectionViewClass: collectionViewClass,
                                            designedHeight: designedHeight,
+                                           backgroundColor:backgroundColor,
                                            clickBlock: clickBlock,
                                            didNeedHighLightBlock: didNeedHighLightBlock)
-
-        cView.backgroundColor = backgroundColor
         self.view.addSubview(cView)
         
         let height = UIViewController.getDropdownCollectionViewHeight(datasource.count, designedHeight: designedHeight)
@@ -270,21 +296,7 @@ extension UIViewController {
         }
         
         // ********设置透明背景图***********
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.blackColor()
-        backgroundView.alpha = 0.3
-        backgroundView.tag = kDropdownBackgroundviewTag
-        self.view.addSubview(backgroundView)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.hideDropdownMenu))
-        backgroundView.addGestureRecognizer(tap)
-        
-        backgroundView.snp_makeConstraints { (make) in
-            make.left.equalTo(ws!.view.snp_left)
-            make.right.equalTo(ws!.view.snp_right)
-            make.top.equalTo(cView.snp_bottom)
-            make.bottom.equalTo(ws!.view.snp_bottom)
-        }
+        self.addShadowView(cView.snp_bottom)
     }
     
     func hideDropdownMenu() {

@@ -8,9 +8,28 @@
 
 import UIKit
 
+class KWSegmentButton: UIButton {
+    var bottomLineView:UIView?
+    convenience init() {
+        self.init(frame:CGRectZero)
+        
+        bottomLineView = UIView()
+        bottomLineView?.backgroundColor = kDropdownMenuDefaultLayerBorderSelectedColor
+        self.addSubview(bottomLineView!)
+        
+        weak var ws = self
+        bottomLineView?.snp_makeConstraints { (make) in
+            make.left.equalTo(ws!.snp_left)
+            make.right.equalTo(ws!.snp_right)
+            make.bottom.equalTo(ws!.snp_bottom)
+            make.height.equalTo(0.5)
+        }
+    }
+}
+
 class KWSegmentControl: UIView {
     
-    var buttons = [UIButton]()
+    var buttons = [KWSegmentButton]()
     var selectBlock:(index:Int)->Void = {_ in}
     
     convenience init(titles:[String],
@@ -20,7 +39,7 @@ class KWSegmentControl: UIView {
         let buttonWidth = UIScreen.mainScreen().bounds.width/CGFloat(titles.count)
         for index in (0...titles.count - 1) {
             let title = titles[index]
-            let button = UIButton(type: .Custom)
+            let button = KWSegmentButton()
             button.setTitle(title, forState: .Normal)
             button.setTitleColor(kDropdownMenuDefaultLayerTitleColor, forState: .Normal)
             button.setTitleColor(kDropdownMenuDefaultLayerTitleSelectedColor, forState: .Selected)
@@ -29,6 +48,7 @@ class KWSegmentControl: UIView {
             self.addSubview(button)
             buttons.append(button)
             button.selected = (index == selectedIndex)
+            button.bottomLineView?.hidden = (index != selectedIndex)
             
             weak var ws = self
             // 离左边的距离
@@ -42,11 +62,12 @@ class KWSegmentControl: UIView {
         }
     }
     
-    func didClick(button:UIButton) {
+    func didClick(button:KWSegmentButton) {
         let tag = button.tag
         for tmp in buttons {
             let isCurrent = (tag == tmp.tag)
             tmp.selected = isCurrent
+            tmp.bottomLineView?.hidden = !isCurrent
             selectBlock(index: tag)
         }
     }
