@@ -13,8 +13,8 @@ class SingleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.edgesForExtendedLayout = .None
+        self.view.backgroundColor = UIColor.white
+        self.edgesForExtendedLayout = UIRectEdge()
         self.title = "一个试的哥哥"
         let datasource = [KWDropdownBaseItem(title:"1", selected: true),
                           KWDropdownBaseItem(title:"2"),

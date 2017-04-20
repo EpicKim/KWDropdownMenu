@@ -15,27 +15,14 @@ class MultiViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
-        self.edgesForExtendedLayout = .None
+        self.edgesForExtendedLayout = UIRectEdge()
         
         let datasource = [KWDropdownBaseItem(title:"1", selected: true),
                           KWDropdownBaseItem(title:"2"),
                           KWDropdownBaseItem(title:"3"),
                           KWDropdownBaseItem(title:"4"),
-                          KWDropdownBaseItem(title:"5"),
-                          KWDropdownBaseItem(title:"6"),
-                          KWDropdownBaseItem(title:"7"),
-                          KWDropdownBaseItem(title:"8"),
-                          KWDropdownBaseItem(title:"8"),
-                          KWDropdownBaseItem(title:"8"),
-                          KWDropdownBaseItem(title:"8"),
-                          KWDropdownBaseItem(title:"随意试试")]
-        
-        let datasource2 = [KWDropdownBaseItem(title:"111"),
-                          KWDropdownBaseItem(title:"222"),
-                          KWDropdownBaseItem(title:"3333"),
-                          KWDropdownBaseItem(title:"4444"),
                           KWDropdownBaseItem(title:"5"),
                           KWDropdownBaseItem(title:"6"),
                           KWDropdownBaseItem(title:"7"),
@@ -55,7 +42,7 @@ class MultiViewController: UIViewController {
         self.setupMultiDropdownMenu([datasource,datasource3],
                                      segmentTitles: ["seg1", "seg2"],
                                      collectionViewClass: KWDropdownBaseCollectionViewCell.self,
-                                     backgroundColor:UIColor.whiteColor(),
+                                     backgroundColor:UIColor.white,
                                      clickBlock: { (section,index) in
             
         })

@@ -13,7 +13,7 @@ class KWDropdownTapView: UIView {
     
     var expanded = false
     
-    var clickBlock:(expanded:Bool)->Void = {_ in }
+    var clickBlock:(_ expanded:Bool)->Void = {_ in }
     
     var titleLabel = UILabel()
     
@@ -22,7 +22,7 @@ class KWDropdownTapView: UIView {
     convenience init(title:String) {
         // TODO: 计算label宽度
         let width = CGFloat((title as NSString).length) * 17.8
-        self.init(frame: CGRectMake(0, 0, width, 40))
+        self.init(frame: CGRect(x: 0, y: 0, width: width, height: 40))
         // 标题
         titleLabel.textColor = kDropdownMenuTitleColor
         titleLabel.text = title
@@ -35,14 +35,14 @@ class KWDropdownTapView: UIView {
         self.addGestureRecognizer(tap)
         
         weak var ws = self
-        titleLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(ws!.snp_left)
-            make.centerY.equalTo(ws!.snp_centerY)
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(ws!.snp.left)
+            make.centerY.equalTo(ws!.snp.centerY)
         }
         
-        titleImageView.snp_makeConstraints { (make) in
-            make.left.equalTo(ws!.titleLabel.snp_right).offset(2)
-            make.centerY.equalTo(ws!.titleLabel.snp_centerY)
+        titleImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(ws!.titleLabel.snp.right).offset(2)
+            make.centerY.equalTo(ws!.titleLabel.snp.centerY)
         }
     }
     // MARK: -Private
@@ -55,7 +55,7 @@ class KWDropdownTapView: UIView {
         else {
             titleImageView.image = kDropdwonMenuTitleDownImage
         }
-        clickBlock(expanded: expanded)
+        clickBlock(expanded)
     }
     
     // MARK: -Public
@@ -64,10 +64,10 @@ class KWDropdownTapView: UIView {
         titleImageView.image = kDropdwonMenuTitleDownImage
     }
     
-    func update(title:String) {
+    func update(_ title:String) {
         self.reset()
         let width = CGFloat((title as NSString).length) * 17.8
-        self.frame = CGRectMake((UIScreen.mainScreen().bounds.size.width - width)/2, self.frame.origin.y, width, 40)
+        self.frame = CGRect(x: (UIScreen.main.bounds.size.width - width)/2, y: self.frame.origin.y, width: width, height: 40)
         titleLabel.text = title
     }
 }

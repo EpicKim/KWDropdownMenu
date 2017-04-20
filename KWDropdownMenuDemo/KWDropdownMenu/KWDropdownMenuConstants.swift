@@ -26,15 +26,15 @@ var kDropdownMenuDefaultCornerRadius:CGFloat = 5
 
 var kDropdownMenuDefaultTitleSize:CGFloat = 14
 
-var kDropdownMenuDefaultLayerBorderColor = UIColor.blackColor()
+var kDropdownMenuDefaultLayerBorderColor = UIColor.black
 
-var kDropdownMenuDefaultLayerTitleColor = UIColor.blackColor()
+var kDropdownMenuDefaultLayerTitleColor = UIColor.black
 
-var kDropdownMenuDefaultLayerBorderSelectedColor = UIColor.redColor()
+var kDropdownMenuDefaultLayerBorderSelectedColor = UIColor.red
 
-var kDropdownMenuDefaultLayerTitleSelectedColor = UIColor.redColor()
+var kDropdownMenuDefaultLayerTitleSelectedColor = UIColor.red
 
-var kDropdownMenuTitleColor = UIColor.redColor()
+var kDropdownMenuTitleColor = UIColor.red
 
 var kDropdwonMenuTitleUpperImage = UIImage(named: "nav_arrow_up_nor")
 

@@ -22,7 +22,7 @@ class KWSegmentControlView: UIView {
         didSet(newValue) {
             for i in 0...(contentViews.count - 1) {
                 let view = contentViews[i]
-                view.hidden = (newValue != i)
+                view.isHidden = (newValue != i)
             }
         }
     }
@@ -31,7 +31,7 @@ class KWSegmentControlView: UIView {
                      views:[UIView],
                      heights:[CGFloat],
                      selectedIndex:Int = 0) {
-        self.init(frame:CGRectZero)
+        self.init(frame:CGRect.zero)
         
         weak var ws = self
         
@@ -45,19 +45,19 @@ class KWSegmentControlView: UIView {
             // 显示制定index的view
             ws?.selectedIndex = index
             // 更新约束
-            ws?.snp_updateConstraints(closure: { (make) in
-                make.left.equalTo(ws!.baseView!.snp_left)
-                make.right.equalTo(ws!.baseView!.snp_right)
-                make.top.equalTo(ws!.baseView!.snp_top)
+            ws?.snp.updateConstraints({ (make) in
+                make.left.equalTo(ws!.baseView!.snp.left)
+                make.right.equalTo(ws!.baseView!.snp.right)
+                make.top.equalTo(ws!.baseView!.snp.top)
                 make.height.equalTo(KWSegmentControlView.headerHeight + heights[index])
             })
         }
         self.addSubview(seg)
         
-        seg.snp_makeConstraints(closure: { (make) in
-            make.left.equalTo(ws!.snp_left)
-            make.right.equalTo(ws!.snp_right)
-            make.top.equalTo(ws!.snp_top)
+        seg.snp.makeConstraints({ (make) in
+            make.left.equalTo(ws!.snp.left)
+            make.right.equalTo(ws!.snp.right)
+            make.top.equalTo(ws!.snp.top)
             make.height.equalTo(KWSegmentControlView.headerHeight)
         })
         
@@ -66,10 +66,10 @@ class KWSegmentControlView: UIView {
             self.addSubview(view)
             
             let height = heights[index]
-            view.snp_makeConstraints(closure: { (make) in
-                make.left.equalTo(ws!.snp_left)
-                make.right.equalTo(ws!.snp_right)
-                make.top.equalTo(seg.snp_bottom)
+            view.snp.makeConstraints({ (make) in
+                make.left.equalTo(ws!.snp.left)
+                make.right.equalTo(ws!.snp.right)
+                make.top.equalTo(seg.snp.bottom)
                 make.height.equalTo(height)
             })
         }
@@ -77,18 +77,18 @@ class KWSegmentControlView: UIView {
         self.selectedIndex = selectedIndex
         for i in 0...(contentViews.count - 1) {
             let view = contentViews[i]
-            view.hidden = (selectedIndex != i)
+            view.isHidden = (selectedIndex != i)
         }
     }
     
-    func show(baseView:UIView) {
+    func show(_ baseView:UIView) {
         self.baseView = baseView
         baseView.addSubview(self)
         
-        self.snp_makeConstraints(closure: { (make) in
-            make.left.equalTo(baseView.snp_left)
-            make.right.equalTo(baseView.snp_right)
-            make.top.equalTo(baseView.snp_top)
+        self.snp.makeConstraints({ (make) in
+            make.left.equalTo(baseView.snp.left)
+            make.right.equalTo(baseView.snp.right)
+            make.top.equalTo(baseView.snp.top)
             make.height.equalTo(KWSegmentControlView.headerHeight + heights[selectedIndex])
         })
     }

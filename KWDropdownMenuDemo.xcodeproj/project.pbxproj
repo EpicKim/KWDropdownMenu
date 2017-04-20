@@ -24,11 +24,13 @@
 		81AD806F1EA5DE0400AAD083 /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */; };
 		81AD80781EA7126400AAD083 /* KWSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80761EA7126400AAD083 /* KWSegmentControl.swift */; };
 		81AD80791EA7126400AAD083 /* KWSegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */; };
-		81AD807B1EA715EC00AAD083 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */; };
+		AEE9E7A26928D62378BF97F2 /* Pods_KWDropdownMenuDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94CCAF9D1353E1FA540A0C7 /* Pods_KWDropdownMenuDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		33C897AD451DB5ED292D54D6 /* Pods-KWDropdownMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		4846A3261257E39CF20D5FF4 /* Pods-KWDropdownMenuDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenuDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenuDemo/Pods-KWDropdownMenuDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5A6EEC07E1F73EB00E5DC11C /* Pods-KWDropdownMenuDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenuDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenuDemo/Pods-KWDropdownMenuDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8120D1DF1E2DCCCC000AEA11 /* KWDropdownBaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWDropdownBaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		8120D1E01E2DCCCC000AEA11 /* KWDropdownMenuAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KWDropdownMenuAssets.xcassets; sourceTree = "<group>"; };
 		8120D1E11E2DCCCC000AEA11 /* KWDropdownCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWDropdownCollectionView.swift; sourceTree = "<group>"; };
@@ -46,8 +48,8 @@
 		81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
 		81AD80761EA7126400AAD083 /* KWSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControl.swift; sourceTree = "<group>"; };
 		81AD80771EA7126400AAD083 /* KWSegmentControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWSegmentControlView.swift; sourceTree = "<group>"; };
-		81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8E0687DAC5E9AD985D4AEE08 /* Pods-KWDropdownMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWDropdownMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu.release.xcconfig"; sourceTree = "<group>"; };
+		A94CCAF9D1353E1FA540A0C7 /* Pods_KWDropdownMenuDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KWDropdownMenuDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB499B8009BB5CD2F90D19F /* Pods_KWDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KWDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				489E5D317C8BF8B90B4A268B /* Pods_KWDropdownMenu.framework in Frameworks */,
+				AEE9E7A26928D62378BF97F2 /* Pods_KWDropdownMenuDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +118,6 @@
 				812EF1F21EA5D7AF003F6758 /* RootViewController.swift */,
 				8176DB9E1E28D88500331F0E /* SingleViewController.swift */,
 				81AD806E1EA5DE0400AAD083 /* MultiViewController.swift */,
-				81AD807A1EA715EC00AAD083 /* UIColorExtension.swift */,
 			);
 			path = KWDropdownMenuDemo;
 			sourceTree = "<group>";
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB499B8009BB5CD2F90D19F /* Pods_KWDropdownMenu.framework */,
+				A94CCAF9D1353E1FA540A0C7 /* Pods_KWDropdownMenuDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +145,8 @@
 			children = (
 				33C897AD451DB5ED292D54D6 /* Pods-KWDropdownMenu.debug.xcconfig */,
 				8E0687DAC5E9AD985D4AEE08 /* Pods-KWDropdownMenu.release.xcconfig */,
+				5A6EEC07E1F73EB00E5DC11C /* Pods-KWDropdownMenuDemo.debug.xcconfig */,
+				4846A3261257E39CF20D5FF4 /* Pods-KWDropdownMenuDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 					8176DB4A1E24D06A00331F0E = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = TG58TXMQN2;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -232,7 +238,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KWDropdownMenuDemo/Pods-KWDropdownMenuDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2097176E80F9602EACEA9A38 /* [CP] Copy Pods Resources */ = {
@@ -247,7 +253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KWDropdownMenu/Pods-KWDropdownMenu-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KWDropdownMenuDemo/Pods-KWDropdownMenuDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDF1A257F6820A284A3361B8 /* [CP] Check Pods Manifest.lock */ = {
@@ -283,7 +289,6 @@
 				8120D1E91E2DCCCC000AEA11 /* KWDropdownMenuConstants.swift in Sources */,
 				812EF1F31EA5D7AF003F6758 /* RootViewController.swift in Sources */,
 				8120D1EA1E2DCCCC000AEA11 /* KWDropdownTapView.swift in Sources */,
-				81AD807B1EA715EC00AAD083 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,29 +409,29 @@
 		};
 		8176DB5E1E24D06A00331F0E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33C897AD451DB5ED292D54D6 /* Pods-KWDropdownMenu.debug.xcconfig */;
+			baseConfigurationReference = 5A6EEC07E1F73EB00E5DC11C /* Pods-KWDropdownMenuDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TG58TXMQN2;
-				INFOPLIST_FILE = KWDropdownMenuDemo/Info.plist;
+				INFOPLIST_FILE = KWDropdownMenuDemo/info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kim.KWDropdownMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		8176DB5F1E24D06A00331F0E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E0687DAC5E9AD985D4AEE08 /* Pods-KWDropdownMenu.release.xcconfig */;
+			baseConfigurationReference = 4846A3261257E39CF20D5FF4 /* Pods-KWDropdownMenuDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TG58TXMQN2;
-				INFOPLIST_FILE = KWDropdownMenuDemo/Info.plist;
+				INFOPLIST_FILE = KWDropdownMenuDemo/info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kim.KWDropdownMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

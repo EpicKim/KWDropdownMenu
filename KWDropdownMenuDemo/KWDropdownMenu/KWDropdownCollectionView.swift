@@ -29,8 +29,8 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
     // 自定义cell的高度
     var itemHeigh:CGFloat!
     // 点击回调
-    var clickClosure:(item:KWDropdownBaseItem, indexPath:NSIndexPath)->Void = {_ in }
-    var didNeedHighlightItemClosure:(indexPath:NSIndexPath)->Void = {_ in }
+    var clickClosure:(_ item:KWDropdownBaseItem, _ indexPath:IndexPath)->Void = {_ in }
+    var didNeedHighlightItemClosure:(_ indexPath:IndexPath)->Void = {_ in }
     
     convenience init(itemWidth:CGFloat,
                      height:CGFloat,
@@ -41,20 +41,20 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: itemWidth, height: height)
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
+        flowLayout.scrollDirection = UICollectionViewScrollDirection.vertical
         flowLayout.minimumLineSpacing = minimumLineSpacing//每个相邻layout的上下
         flowLayout.minimumInteritemSpacing = minimumInteritemSpacing//每个相邻layout的左右
-        flowLayout.headerReferenceSize = CGSizeMake(0,0)
+        flowLayout.headerReferenceSize = CGSize(width: 0,height: 0)
         flowLayout.sectionInset = UIEdgeInsetsMake(kDropdwonMenuCollectionViewTopBottomInset, kDropdwonMenuCollectionViewLeftRightInset, kDropdwonMenuCollectionViewTopBottomInset, kDropdwonMenuCollectionViewLeftRightInset)
         
-        self.init(frame: CGRectZero, collectionViewLayout: flowLayout)
+        self.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         self.datasource = datasource
         
-        self.scrollEnabled = false
-        self.backgroundColor = UIColor.whiteColor()
+        self.isScrollEnabled = false
+        self.backgroundColor = UIColor.white
         self.delegate = self
         self.dataSource = self
-        self.registerClass(collectionViewClass, forCellWithReuseIdentifier: "cell")
+        self.register(collectionViewClass, forCellWithReuseIdentifier: "cell")
         
         self.itemWidth = itemWidth
         self.itemHeigh = height
@@ -63,11 +63,11 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
     // MARK: -Public
     
     // MARK: -CollectionView Delegate
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.datasource.count
     }
     
@@ -75,20 +75,20 @@ class KWDropdownCollectionView: UICollectionView,UICollectionViewDelegate, UICol
         return CGSize(width: 50, height: 0)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = self.datasource[indexPath.row]
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! KWDropdownBaseCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! KWDropdownBaseCollectionViewCell
         cell.update(item)
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = self.datasource[indexPath.row]
-        self.clickClosure(item: item, indexPath: indexPath)
+        self.clickClosure(item, indexPath)
     }
     
-    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        didNeedHighlightItemClosure(indexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        didNeedHighlightItemClosure(indexPath)
     }
 }
