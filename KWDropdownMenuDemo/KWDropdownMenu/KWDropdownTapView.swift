@@ -31,7 +31,8 @@ class KWDropdownTapView: UIView {
         titleImageView.image = kDropdwonMenuTitleDownImage
         self.addSubview(titleImageView)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(KWDropdownTapView.didClickOnTitle))
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(KWDropdownTapView.didClickOnTitle))
         self.addGestureRecognizer(tap)
         
         weak var ws = self
@@ -67,7 +68,10 @@ class KWDropdownTapView: UIView {
     func update(_ title:String) {
         self.reset()
         let width = CGFloat((title as NSString).length) * 17.8
-        self.frame = CGRect(x: (UIScreen.main.bounds.size.width - width)/2, y: self.frame.origin.y, width: width, height: 40)
+        self.frame = CGRect(x: (UIScreen.main.bounds.size.width - width)/2,
+                            y: self.frame.origin.y,
+                            width: width,
+                            height: 40)
         titleLabel.text = title
     }
 }

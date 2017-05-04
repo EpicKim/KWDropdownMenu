@@ -31,37 +31,53 @@ private var currentDropdownSectionKey: Void?
 extension UIViewController {
     @IBInspectable var currentDropdownSection: Int? {
         get {
-            return objc_getAssociatedObject(self, &currentDropdownSectionKey) as? Int
+            return objc_getAssociatedObject(self,
+                                            &currentDropdownSectionKey) as? Int
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &currentDropdownSectionKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self,
+                                     &currentDropdownSectionKey,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     @IBInspectable var dropDownDatasource: [KWDropdownBaseItem]? {
         get {
-            return objc_getAssociatedObject(self, &key) as? [KWDropdownBaseItem]
+            return objc_getAssociatedObject(self,
+                                            &key) as? [KWDropdownBaseItem]
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self,
+                                     &key,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     @IBInspectable var multiDropDownDatasource: [[KWDropdownBaseItem]]? {
         get {
-            return objc_getAssociatedObject(self, &multiDatasourceKey) as? [[KWDropdownBaseItem]]
+            return objc_getAssociatedObject(self,
+                                            &multiDatasourceKey) as? [[KWDropdownBaseItem]]
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &multiDatasourceKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self,
+                                     &multiDatasourceKey,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     @IBInspectable var selectedItem: KWDropdownBaseItem? {
         get {
-            return objc_getAssociatedObject(self, &selectedItemKey) as? KWDropdownBaseItem
+            return objc_getAssociatedObject(self,
+                                            &selectedItemKey) as? KWDropdownBaseItem
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &selectedItemKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self,
+                                     &selectedItemKey,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     // MARK: -更新
@@ -114,8 +130,10 @@ extension UIViewController {
                 var heights = [CGFloat]()
                 for i in 0...(datasource.count - 1) {
                     let array = datasource[i]
-                    let height = UIViewController.getDropdownCollectionViewHeight(array.count, designedHeight: designedHeight)
-                    let cview = self.getCollectionView(array, collectionViewClass: collectionViewClass,
+                    let height = UIViewController.getDropdownCollectionViewHeight(array.count,
+                                                                                  designedHeight: designedHeight)
+                    let cview = self.getCollectionView(array,
+                                                       collectionViewClass: collectionViewClass,
                                                        backgroundColor:backgroundColor,
                                                        clickBlock: { (index) in
                         for tmp in datasource {
@@ -138,10 +156,10 @@ extension UIViewController {
                                                selectedIndex: selectedIndex)
                 seg.show(self.view)
                 
-                self.addShadowView(seg.snp.bottom)
+                ws?.addShadowView(seg.snp.bottom)
             }
             else {
-                ws!.hideDropdownMenu()
+                ws?.hideDropdownMenu()
             }
         }
     }
@@ -303,8 +321,8 @@ extension UIViewController {
         (self.navigationItem.titleView as? KWDropdownTapView)?.reset()
         for subview in self.view.subviews {
             if subview.isKind(of: KWDropdownCollectionView.self) ||
-               subview.tag == kDropdownBackgroundviewTag ||
-               subview.isKind(of: KWSegmentControlView.self) {
+                subview.tag == kDropdownBackgroundviewTag ||
+                subview.isKind(of: KWSegmentControlView.self) {
                 subview.removeFromSuperview()
             }
         }

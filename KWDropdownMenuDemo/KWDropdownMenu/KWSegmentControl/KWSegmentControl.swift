@@ -41,10 +41,14 @@ class KWSegmentControl: UIView {
             let title = titles[index]
             let button = KWSegmentButton()
             button.setTitle(title, for: UIControlState())
-            button.setTitleColor(kDropdownMenuDefaultLayerTitleColor, for: UIControlState())
-            button.setTitleColor(kDropdownMenuDefaultLayerTitleSelectedColor, for: .selected)
+            button.setTitleColor(kDropdownMenuDefaultLayerTitleColor,
+                                 for: UIControlState())
+            button.setTitleColor(kDropdownMenuDefaultLayerTitleSelectedColor,
+                                 for: .selected)
             button.tag = index
-            button.addTarget(self, action: #selector(KWSegmentControl.didClick(_:)), for: .touchUpInside)
+            button.addTarget(self,
+                             action: #selector(KWSegmentControl.didClick(_:)),
+                             for: .touchUpInside)
             self.addSubview(button)
             buttons.append(button)
             button.isSelected = (index == selectedIndex)
