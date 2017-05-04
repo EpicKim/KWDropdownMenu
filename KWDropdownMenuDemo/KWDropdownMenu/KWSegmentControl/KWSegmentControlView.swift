@@ -18,6 +18,14 @@ class KWSegmentControlView: UIView {
     
     var baseView:UIView?
     
+    var titles:[String]!
+    
+    var segmentHeight:CGFloat! {
+        get {
+            return titles.count == 1 ? 0:KWSegmentControlView.headerHeight
+        }
+    }
+    
     var selectedIndex:Int! {
         didSet(newValue) {
             for i in 0...(contentViews.count - 1) {
@@ -39,6 +47,8 @@ class KWSegmentControlView: UIView {
 
         self.contentViews = views
         
+        self.titles = titles
+        
         let seg = KWSegmentControl(titles: titles,
                                    selectedIndex: selectedIndex)
         seg.selectBlock = {(index)->Void in
@@ -53,12 +63,12 @@ class KWSegmentControlView: UIView {
             })
         }
         self.addSubview(seg)
-        
+
         seg.snp.makeConstraints({ (make) in
             make.left.equalTo(ws!.snp.left)
             make.right.equalTo(ws!.snp.right)
             make.top.equalTo(ws!.snp.top)
-            make.height.equalTo(KWSegmentControlView.headerHeight)
+            make.height.equalTo(ws!.segmentHeight!)
         })
         
         for index in 0...(views.count - 1) {
@@ -85,11 +95,12 @@ class KWSegmentControlView: UIView {
         self.baseView = baseView
         baseView.addSubview(self)
         
+        weak var ws = self
         self.snp.makeConstraints({ (make) in
             make.left.equalTo(baseView.snp.left)
             make.right.equalTo(baseView.snp.right)
             make.top.equalTo(baseView.snp.top)
-            make.height.equalTo(KWSegmentControlView.headerHeight + heights[selectedIndex])
+            make.height.equalTo(ws!.segmentHeight! + heights[selectedIndex])
         })
     }
 }

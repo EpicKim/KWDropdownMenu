@@ -105,6 +105,7 @@ extension UIViewController {
         }
         self.selectedItem = datasource.first?.first
         self.multiDropDownDatasource = datasource
+        
         weak var ws = self
         
         var tmpTitle = self.title

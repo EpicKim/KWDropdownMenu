@@ -46,6 +46,13 @@ class MultiViewController: UIViewController {
                                      clickBlock: { (section,index) in
             
         })
+        
+//        self.setupMultiDropdownMenu([datasource],
+//                                    segmentTitles: ["seg1"],
+//                                    collectionViewClass: KWDropdownBaseCollectionViewCell.self,
+//                                    backgroundColor:UIColor.white,
+//                                    clickBlock: { (section,index) in
+//        })
     }
 
     override func didReceiveMemoryWarning() {
